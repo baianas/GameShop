@@ -1,6 +1,6 @@
 from django import forms
 
-from games.models import Game
+from games.models import Game, GameImage
 
 
 class GameForm(forms.Modelform):
@@ -13,3 +13,9 @@ class GameForm(forms.Modelform):
         if price <= 0:
             raise forms.ValidationError('Цена должна быть положительной')
         return price
+
+
+class GameImageForm(forms.ModelForm):
+    class Meta:
+        model = GameImage
+        fields = ['image']

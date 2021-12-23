@@ -22,3 +22,9 @@ class Game(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('game-details', args=(self.id,))
 
+
+class GameImage(models.Model):
+    game = models.ForeignKey(Game,
+                             on_delete=models.CASCADE,
+                             related_name='images')
+    image = models.ImageField(upload_to='games')

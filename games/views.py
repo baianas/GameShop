@@ -1,10 +1,34 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.forms import modelformset_factory
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView, DetailView
 
-from games.forms import GameForm
-from games.models import Game
+from games.forms import GameForm, GameImageForm
+from games.models import Game, GameImage
+
+
+class GameListView(ListView):
+    queryset = Game.objects.all()
+    template_name = 'game/games_list.html'
+    context_object_name = 'games'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data()
+    #     context['cart_form']
+
+
+class GameDetailsView(DetailView):
+    queryset = Game.objects.all()
+    template_name = 'game/game_details.html'
+    context_object_name = 'game'
+
+
+ImageFormSet = modelformset_factory(GameImage,
+                                    form=GameImageForm,
+                                    extra=3,
+                                    max_num=5,
+                                    can_delete=True)
 
 
 class IsAdminMixin(UserPassesTestMixin):
