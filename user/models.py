@@ -48,3 +48,20 @@ class User(AbstractBaseUser):
 
     def has_perm(self,obj=None):
         return self.is_staff
+
+    def create_activation_code(self):
+        code = get_random_string(8)
+        self.activation_code = code
+        self.save()
+
+    def send_activation_mail(self,action):
+        if action == 'register':
+            message = f'http://localhost:8000/user/activate/{self.activation_code}/'
+        else:
+            message = f'Ваш код подтверждения: {self.activation_code}'
+        send_mail(
+            'Активация аккаунта',
+            message,
+            'test@gmail.com',
+            [self.email]
+        )

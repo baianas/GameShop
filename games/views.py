@@ -52,3 +52,9 @@ class CreateGameView(CreateView):
                 GameImage.objects.create(game=game, image=image)
             return redirect(game.get_absolute_url())
         return self.form_invalid(form)
+
+
+class MainPageView(ListView):
+    model = Game
+    template_name = 'index.html'
+    context_object_name = 'games'
