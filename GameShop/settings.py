@@ -75,9 +75,9 @@ DATABASES = {
         'ENGINE': config('ENGINE'),
         'NAME': config('NAME'),
         'USER': config('USER'),
-        'PASSWORD': config('1'),
-        'PORT': config('5432'),
-        'HOST': config('localhost'),
+        'PASSWORD': config('PASSWORD'),
+        'PORT': config('PORT'),
+        'HOST': config('HOST'),
     }
 }
 

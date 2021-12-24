@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>{{ game.name }}</h1>
+    {% if game.images.count %}
+        {% for pic in game.images.all %}
+        {% if pic.image %}
+            <img src="{{ pic.image.url }}" height="300px" weight="300px">
+        {% else %}
+            <img src="https://via.placeholder.com/300">
+        {% endif %}
+        {% endfor %}
+    {% else %}
+    <img src="https://via.placeholder.com/300">
+  {% endif %}
+    <p>Описание: {{ game.description }}</p>
+    <p>Цена: {{ game.price }}</p>
+</body>
+</html>

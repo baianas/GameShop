@@ -3,7 +3,7 @@ from django import forms
 from games.models import Game, GameImage
 
 
-class GameForm(forms.Modelform):
+class GameForm(forms.ModelForm):
     class Meta:
         model = Game
         fields = ['name', 'description', 'price', 'category']
