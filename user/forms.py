@@ -6,11 +6,12 @@ User = get_user_model()
 
 
 class RegistrationForm(forms.ModelForm):
-    password = forms.CharField(min_length=6,widget=forms.PasswordInput)
+    password = forms.CharField(min_length=6, widget=forms.PasswordInput)
     password_confirm = forms.CharField(min_length=6, widget=forms.PasswordInput)
+
     class Meta:
         model = User
-        fields = ['email','name','password','password_confirm']
+        fields = ['email', 'name', 'password', 'password_confirm']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -36,12 +37,12 @@ class RegistrationForm(forms.ModelForm):
 
 class ChangePasswordForm(forms.Form):
     old_password = forms.CharField(widget=forms.PasswordInput)
-    password = forms.CharField(min_length=6,widget=forms.PasswordInput)
-    password_confirm = forms.CharField(min_length=6,widget=forms.PasswordInput)
+    password = forms.CharField(min_length=6, widget=forms.PasswordInput)
+    password_confirm = forms.CharField(min_length=6, widget=forms.PasswordInput)
 
-    def __init__(self,*args,**kwargs):
+    def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
-        super().__init__(*args,**kwargs)
+        super().__init__(*args, **kwargs)
 
     def clean_old_password(self):
         old_pass = self.cleaned_data.get('old_password')
@@ -79,10 +80,11 @@ class ForgotPasswordForm(forms.Form):
         user.create_activation_code()
         user.send_activation_mail('forgot_password')
 
+
 class ForgotPasswordCompleteForm(forms.Form):
-    code = forms.CharField(min_length=8,max_length=8)
-    password = forms.CharField(min_length=6,widget=forms.PasswordInput)
-    password_confirm = forms.CharField(min_length=6,widget=forms.PasswordInput)
+    code = forms.CharField(min_length=8, max_length=8)
+    password = forms.CharField(min_length=6, widget=forms.PasswordInput)
+    password_confirm = forms.CharField(min_length=6, widget=forms.PasswordInput)
 
     def clean_code(self):
         code = self.cleaned_data.get('code')

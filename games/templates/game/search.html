@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>Результат поиска: </h1>
+    {% if not games %}
+        <p>По вашему запросу ничего не найдено.</p>
+    {% else %}
+        {% for game in games %}
+            <p>
+                <a href="{% url 'game-details' game.id %}">{{game.name}}</a><br>
+                {{ game.price }}
+            </p>
+        {% endfor %}
+    {% endif %}
+{% endblock body %}

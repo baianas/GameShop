@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+    <h1>Добавление игр</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="file" name="game_image" accept="image/*" >
+        <input type="file" name="game_image" accept="image/*" >
+        <input type="file" name="game_image" accept="image/*" >
+        <button type="submit">Создать</button>
+    </form>
+{% endblock body %}

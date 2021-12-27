@@ -14,17 +14,16 @@ class RegisterView(View):
     form_class = RegistrationForm
     template_name = 'user/registration.html'
 
-    def get(self,request,*args,**kwargs):
+    def get(self, request, *args, **kwargs):
         form = self.form_class()
-        return render(request,self.template_name,{'form':form})
+        return render(request, self.template_name, {'form': form})
 
-
-    def post(self,request,*args,**kwargs):
+    def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
             return redirect(reverse_lazy('register-success'))
-        return render(request,self.template_name,{'form':form})
+        return render(request, self.template_name, {'form': form})
 
 
 class SuccessRegistrationView(TemplateView):
@@ -32,30 +31,29 @@ class SuccessRegistrationView(TemplateView):
 
 
 class ActivationView(View):
-    def get(self,request,*args,**kwargs):
+    def get(self, request, *args, **kwargs):
         code = kwargs.get('code')
-        user = get_object_or_404(User,activation_code=code)
+        user = get_object_or_404(User, activation_code=code)
         user.is_active = True
         user.activation_code = ''
         user.save()
-        return render(request,'user/activation.html')
+        return render(request, 'user/activation.html')
 
 
 class SignInView(LoginView):
     template_name = 'user/login.html'
 
 
-
-class ChangePasswordView(LoginRequiredMixin,View):
+class ChangePasswordView(LoginRequiredMixin, View):
     template_name = 'user/change_password.html'
     form_class = ChangePasswordForm
 
-    def get(self,request,*args,**kwargs):
+    def get(self, request, *args, **kwargs):
         form = ChangePasswordForm(request=request)
-        return render(request,self.template_name,{'form':form})
+        return render(request, self.template_name, {'form': form})
 
-    def post(self,request,*args,**kwargs):
-        form = self.form_class(request.POST,request=request)
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request=request)
         if form.is_valid():
             form.save()
             return redirect(reverse_lazy('games'))
@@ -66,30 +64,30 @@ class ForgotPasswordView(View):
     template_name = 'user/forgot_password.html'
     form_class = ForgotPasswordForm
 
-    def get(self,request,*args,**kwargs):
+    def get(self, request, *args, **kwargs):
         form = self.form_class()
-        return render(request,self.template_name,{'form':form})
+        return render(request, self.template_name, {'form': form})
 
-    def post(self,request,*args,**kwargs):
+    def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.send_mail()
             return redirect(reverse_lazy('forgot-password-complete'))
-        return render(request, self.template_name,{'form': form})
+        return render(request, self.template_name, {'form': form})
 
 
 class ForgotPasswordCompleteView(View):
     form_class = ForgotPasswordCompleteForm
     template_name = 'user/forgot_password_complete.html'
 
-    def get(self,request,*args,**kwargs):
+    def get(self, request, *args, **kwargs):
         form = self.form_class()
-        return render(request,self.template_name,{'form': form})
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            return  redirect(reverse_lazy('games'))
-        return render(request,self.template_name,{'form': form})
+            return redirect(reverse_lazy('games'))
+        return render(request, self.template_name, {'form': form})
 
