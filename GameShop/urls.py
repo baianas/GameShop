@@ -10,7 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainPageView.as_view(), name='home'),
     path('games/', include('games.urls')),
-    path('account/', include('user.urls')),
+    path('user/', include('user.urls')),
     path('cart/', include('order.urls')),
     path('order/activate/<str:activation_code>/', ActivateOrderView.as_view())
 ]

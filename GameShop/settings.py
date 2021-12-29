@@ -137,11 +137,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mukashov.beibars2003@gmail.com'
-EMAIL_HOST_PASSWORD = 'beibars01022003'
-
+EMAIL_HOST_USER = 'shermatovbaianas@gmail.com'
+EMAIL_HOST_PASSWORD = 'Shermatovgoogle12345'
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'games'
+LOGIN_REDIRECT_URL = 'home'
 LOGOUT_URL = 'logout'
-LOGOUT_REDIRECT_URL = 'games'
+LOGOUT_REDIRECT_URL = 'home'

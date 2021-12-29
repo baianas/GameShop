@@ -8,13 +8,14 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 
 from games.forms import GameForm, GameImageForm
 from games.models import Game, GameImage
+from order.forms import AddToCartForm
 
 
 class GameListView(ListView):
     queryset = Game.objects.all()
     template_name = 'game/games_list.html'
     context_object_name = 'games'
-    paginate_by = 8
+    paginate_by = 6
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data()
@@ -25,6 +26,11 @@ class GameDetailsView(DetailView):
     queryset = Game.objects.all()
     template_name = 'game/game_details.html'
     context_object_name = 'game'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['cart_form'] = AddToCartForm()
+        return context
 
 
 ImageFormSet = modelformset_factory(GameImage,

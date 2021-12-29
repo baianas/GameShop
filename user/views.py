@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView
 from django.contrib.auth.views import LoginView
 from user.forms import RegistrationForm, ChangePasswordForm, ForgotPasswordForm, ForgotPasswordCompleteForm
 
@@ -26,7 +26,7 @@ class RegisterView(View):
         return render(request, self.template_name, {'form': form})
 
 
-class SuccessRegistrationView(TemplateView):
+class SuccessfulRegistrationView(TemplateView):
     template_name = 'user/success_registration.html'
 
 

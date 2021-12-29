@@ -14,11 +14,13 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
+    # создаёт обычных пользователей
     def create_user(self, email, password, name, **extra_fields):
         extra_fields.setdefault('is_active', False)
         extra_fields.setdefault('is_staff', False)
         return self._create(email, password, name, **extra_fields)
 
+    # создаёт админстраторов
     def create_superuser(self, email, password, name, **extra_fields):
         extra_fields.setdefault('is_active', True)
         extra_fields.setdefault('is_staff', True)
@@ -53,7 +55,7 @@ class User(AbstractBaseUser):
 
     def send_activation_mail(self, action):
         if action == 'register':
-            message = f'http://localhost:8000/user/activate/{self.activation_code}/'
+            message = f'http:/localhost:8000/account/activate/{self.activation_code}/'
         else:
             message = f'Ваш код подтверждения: {self.activation_code}'
         send_mail(

@@ -20,7 +20,7 @@ class Game(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse_lazy('game-details', args=(self.id,))
+        return reverse_lazy('game-details', args=(self.id, ))
 
 
 class GameImage(models.Model):

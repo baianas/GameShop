@@ -1,35 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-
-	<!-- Games -->
-
-	<div class="products">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					
-					<div class="product_grid">
-					{% for game in games %}
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img src="{{ game.images.first.image.url }}" alt=""></div>
-							<div class="product_extra product_new"><a href="categories.html">New</a></div>
-							<div class="product_content">
-								<div class="product_title"><a href="{% url 'game-details' game.id %}">{{ game.name }}</a></div>
-								<div class="product_price">{{ game.price }}</div>
-							</div>
-						</div>
-						{% endfor %}
-
-
-					</div>
-						
-				</div>
-			</div>
-		</div>
-	</div>
-
+<div>
+    <div class="games-main">
+        {% for game in games %}
+        <div class="game-card" style="width: 250px;">
+            <a href="{% url 'game-details' game.id %}">
+                {% if game.images.count %}
+                {% for pic in game.images.all %}
+                {% if pic.image %}
+                <img style="width: 150px; height: 200px;" src="{{ game.images.first.image.url }}" class="img-fluid rounded-start" alt="Games image">
+                {% else %}
+                <img style="width: 150px; height: 150px;" src="{% static 'img/gamepad.png' %}">
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <img style="width: 150px; height: 150px;" src="{% static 'img/gamepad.png' %}">
+                {% endif %}
+            </a>
+            <h5>{{ game.name }}</h5>
+            <h4 class="game-price">{{ game.price }}</h4>
+            <a href="{% url 'game-details' game.id %}">
+            <button class="details-btn">Details</button>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
 
 {% endblock body %}

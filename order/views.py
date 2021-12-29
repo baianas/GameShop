@@ -8,7 +8,6 @@ from games.models import Game
 from order.models import Cart, Order, OrderItem
 
 
-
 class AddToCartView(View):
     def post(self, request, game_id):
         cart = Cart(request)
@@ -47,7 +46,7 @@ class CreateOrderView(View):
     def get(self, request):
         session_cart = Cart(request)
         if not session_cart.cart:
-            return redirect(reverse_lazy('index'))
+            return redirect(reverse_lazy('home'))
         order = Order(user=request.user, total_price=session_cart.get_total_price())
         for id, values in session_cart.cart.items():
             game = Game.objects.get(id=id)

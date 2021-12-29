@@ -20,7 +20,7 @@ class Cart:
         self.cart = cart
 
     def add(self, game_id, quantity, price):
-        product_id = str(game_id)
+        game_id = str(game_id)
         if game_id not in self.cart:
             self.cart[game_id] = {
                 'quantity': quantity,
@@ -59,6 +59,12 @@ class Cart:
         return sum(Decimal(item['price'] * item['quantity'])
                    for item in self.cart.values())
 
+    def increment_quantity(self, game_id):
+        game_id = str(game_id)
+        if game_id in self.cart:
+            if self.cart[game_id]['quantity'] < 20:
+                self.cart[game_id]['quantity'] += 1
+                self.save()
 
 
 class Order(models.Model):

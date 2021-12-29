@@ -22,36 +22,25 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form method="post" class="login100-form validate-form">
+                    {% csrf_token %}
 					<span class="login100-form-title p-b-26">
 						Welcome to
 					</span>
-					<span class="login100-form-title p-b-48">
+
+					<span class="login100-form-title p-b-26">
 						Sublime.
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-						<input class="input100" type="text" name="email">
-						<span class="focus-input100" data-placeholder="Email"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<span class="btn-show-pass">
-							<i class="zmdi zmdi-eye"></i>
-						</span>
-						<input class="input100" type="password" name="pass">
-						<span class="focus-input100" data-placeholder="Password"></span>
-					</div>
+	                    {{ form.as_p }}
 
 
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<a href="{% url 'home' %}">
 								<button class="login100-form-btn" type="submit">
 								Login
 								</button>
-								</a>
 						</div>
 					</div>
 
