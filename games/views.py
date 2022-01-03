@@ -17,10 +17,6 @@ class GameListView(ListView):
     context_object_name = 'games'
     paginate_by = 6
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data()
-    #     context['cart_form']
-
 
 class GameDetailsView(DetailView):
     queryset = Game.objects.all()
@@ -46,7 +42,7 @@ class IsAdminMixin(UserPassesTestMixin):
         return user.is_authenticated and user.is_staff
 
 
-class CreateGameView(CreateView):
+class CreateGameView(IsAdminMixin, CreateView):
     queryset = Game.objects.all()
     template_name = 'game/create_game.html'
     form_class = GameForm
